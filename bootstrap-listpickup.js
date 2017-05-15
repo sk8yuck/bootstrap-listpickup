@@ -77,12 +77,12 @@
     initAddonBtn = function(){
       //init addonBtn
       $addonBtnHtml.on("click",function(){
-        buildModal(data, $modal);
+        $.fn.listpickup.buildModal(data, $modal);
         $modal.modal("show");
       });
 
       $ctrl.on("click",function(){
-        buildModal(data, $modal);
+        $.fn.listpickup.buildModal(data, $modal);
         $modal.modal('show');
       });
 
