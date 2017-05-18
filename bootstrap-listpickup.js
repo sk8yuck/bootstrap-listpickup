@@ -27,7 +27,6 @@
       buildOptions();
       initModal();
       initAddonBtn();
-      $ctrl.attr("disabled",true);
     },
     buildOptions = function(){
       $ctrl.find("option").each(function(i,option){
@@ -35,18 +34,24 @@
       });
     },
     initModal = function(){
-      var headerHTML = options.title,
+      var headerHTML = [
+        "<button type='button' class='close' data-dismiss='modal' aria-label='关闭>'<span aria-hidden='true'>&times;</span></button>",
+        "<h4 class='modal-title'>"+options.title+"</h4>"
+      ].join(''),
       $textFilter = $([
         "<input type='text' placeholder='过滤...' class='form-control text-filter'/>"
       ].join('')),
       $body = $([
-        "<div class='list-group' style='height:600px;overflow-y:scroll;'>",
+        "<div class='list-group' style='height:400px;overflow-y:scroll;'>",
         "</div>"
       ].join('')),
       $btnConfirm = $("<button type='button' class='btn btn-success'>确定</button>"),
       $btnClose = $([
         "<button type='button' class='btn btn-default' data-dismiss='modal'>关闭</button>"
       ].join(''));
+
+      $modal.attr("data-backdrop", options.backdropEnable);
+      $modal.attr("data-keyboard", options.keyboardEnable);
 
       $textFilter.on('input',function(){
         if($textFilter.val()&&""!=$textFilter.val()){
@@ -81,7 +86,9 @@
         $modal.modal("show");
       });
 
-      $ctrl.on("click",function(){
+      $ctrl.on("mousedown",function(e){
+        e.preventDefault();
+      }).on('click',function(){
         $.fn.listpickup.buildModal(data, $modal);
         $modal.modal('show');
       });
@@ -117,7 +124,9 @@
   $.fn.listpickup.defaults = {
     title:"选择",
     valueVisible:true,
-    filterEnable:true
+    filterEnable:true,
+    escEnable:true,
+    backdropEnable:true
   };
 
   $(document).ready(function(){
