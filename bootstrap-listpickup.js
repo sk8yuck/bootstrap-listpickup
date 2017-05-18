@@ -122,6 +122,8 @@
       if(options.valueVisible)
         $option = $("<a href='#' value='"+option.value+"' class='list-group-item'>["+option.value+"]"+option.name+"</a>");
       $option.on('click',function(){
+        $modal.find(".list-group-item").removeClass("active");
+        $option.addClass("active");
         $modal.selectedValue = $option.attr('value');
       });
 
