@@ -96,6 +96,15 @@
       $ctrl.after($addonBtnHtml);
     };
     //option merge
+    for(key in $.fn.listpickup.defaults){
+      var attrVal = $ctrl.attr("data-"+key.replace(/([A-Z])/g,"-$1").toLowerCase());
+      if(attrVal){
+        if(!userOptions)
+          userOptions = {};
+        userOptions[key] = attrVal;
+      }
+    }
+
     options = $.extend({},$.fn.listpickup.defaults,userOptions);
 
     //init
@@ -125,7 +134,7 @@
     title:"选择",
     valueVisible:true,
     filterEnable:true,
-    escEnable:true,
+    keyboardEnable:true,
     backdropEnable:true
   };
 
